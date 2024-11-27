@@ -1,1 +1,1 @@
-# Mini Project For Blockchain Technologies
+# Mini Project For Blockchain Technology
