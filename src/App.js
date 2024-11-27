@@ -1,10 +1,7 @@
-import React, { useCallback } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import Web3 from "web3";
+import React, { useCallback, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
+import Web3 from "web3";
 
 import { ABI } from "./data/Data";
 
@@ -165,7 +162,7 @@ const App = () => {
     }, [loadBlockchainData]);
 
     return (
-        <Box>
+        <div className="bg-gray-100 min-h-screen">
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -181,7 +178,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route
-                    path="/ballot"
+                    path="/election"
                     element={
                         <Create
                             voting={voting}
@@ -189,20 +186,15 @@ const App = () => {
                             contract={contract}
                             setContract={setContract}
                             setLoading={setLoading}
-                            // Choices
                             getChoices={getChoices}
                             choices={choices}
-                            // Voting
                             disable={disable}
                             setDisable={setDisable}
                             startVoting={startVoting}
-                            // Voters
                             totalVoters={totalVoters}
                             getVoters={getVoters}
-                            // Get State
                             state={state}
                             getCurrentState={getCurrentState}
-                            // Get Ballot
                             ballot={ballot}
                             setBallot={setBallot}
                             getBallotDetails={getBallotDetails}
@@ -220,26 +212,20 @@ const App = () => {
                             setLoading={setLoading}
                             setContract={setContract}
                             contract={contract}
-                            // Choices
                             getChoices={getChoices}
                             choices={choices}
-                            // Get State
                             state={state}
                             ended={ended}
                             getCurrentState={getCurrentState}
-                            // Get Ballot
                             ballot={ballot}
                             setBallot={setBallot}
                             visible={visible}
                             getBallotDetails={getBallotDetails}
-                            // End Voting
                             endVoting={endVoting}
-                            // Total Votes
                             totalVote={totalVote}
                             getTotalVotes={getTotalVotes}
                             getVoters={getVoters}
                             totalVoters={totalVoters}
-                            // Check
                             checkIsVoter={checkIsVoter}
                             isVoter={isVoter}
                             hasVoted={hasVoted}
@@ -256,9 +242,7 @@ const App = () => {
                             ballot={ballot}
                             setContract={setContract}
                             contract={contract}
-                            // Voting
                             voting={voting}
-                            // Choices
                             choices={choices}
                             getChoices={getChoices}
                             getCurrentState={getCurrentState}
@@ -266,10 +250,12 @@ const App = () => {
                     }
                 />
             </Routes>
-            <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
-                <CircularProgress color="inherit" />
-            </Backdrop>
-        </Box>
+            {loading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="loader border-t-4 border-white rounded-full w-12 h-12 animate-spin"></div>
+                </div>
+            )}
+        </div>
     );
 };
 
