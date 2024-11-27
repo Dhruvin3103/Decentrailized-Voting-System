@@ -2,5 +2,9 @@
 const Voting = artifacts.require("Voting");
 
 module.exports = async function (deployer) {
-    await deployer.deploy(Voting);
+    const ballotOfficialName = "Official Name"; // Replace with actual value
+    const proposal = "Proposal Title"; // Replace with actual proposal text
+
+    // Deploy the Voting contract with the constructor parameters
+    await deployer.deploy(Voting, ballotOfficialName, proposal);
 };
